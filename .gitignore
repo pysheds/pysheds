@@ -97,3 +97,6 @@ ENV/
 
 # Rope project settings
 .ropeproject
+
+# Coverage
+coverage.lcov
