@@ -44,7 +44,7 @@ setup(
         "scipy",
     ],
     extras_require=dict(
-        dev=["pytest", "pytest-cov"],
+        dev=["coverage", "pytest", "pytest-cov"],
         recipes=["geopandas", "ipython", "matplotlib", "seaborn"]
     ),
 )
