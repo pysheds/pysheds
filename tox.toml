@@ -1,0 +1,46 @@
+env_list = [
+  "lint",
+  {product = [{prefix = "py3", start = 10, stop = 14}]}
+]
+skip_missing_interpreters = true
+
+# No linting of code setup yet
+[env.lint]
+labels = ["lint"]
+description = "Run code quality compliance tests under {basepython}"
+skip_install = true
+commands_pre = [
+  ["python", "-m", "pip", "list"]
+]
+commands = [
+  ["python", "-c", "print(\"No linting checks are performed at this time. Code quality assurance to be determined.\")"]
+]
+commands_post = []
+
+[env_run_base]
+description = "Run tests with pytest under {basepython}"
+set_env = {COV_CORE_SOURCE = "", PYTEST_ADDOPTS = "--cov=pysheds --cov-report=lcov", PYTHONPATH = "{toxinidir}"}
+passenv = [
+  "CI",
+  "GITHUB_*",
+]
+extras = ["dev"]
+install_command = ["python", "-m", "pip", "install", "--no-user", "{opts}", "{packages}"]
+download = true
+commands_pre = [
+  ["python", "-m", "pip", "list"],
+  ["python", "-m", "pip", "check"],
+]
+commands = [
+  ["pytest", "{posargs}"]
+]
+commands_post = [
+  ["coverage", "report"]
+]
+
+[gh.python]
+"3.10" = ["py3.10"]
+"3.11" = ["py3.11"]
+"3.12" = ["py3.12"]
+"3.13" = ["py3.13"]
+"3.14" = ["py3.14"]
