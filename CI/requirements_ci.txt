@@ -101,9 +101,9 @@ tomli-w==1.2.0 \
     --hash=sha256:188306098d013b691fcadc011abd66727d3c414c571bb01b1a174ba8c983cf90 \
     --hash=sha256:2dd14fac5a47c27be9cd4c976af5a12d87fb1f0b4512f81d69cce3b35ae25021
     # via tox
-tox==4.49.1 \
-    --hash=sha256:4130d02e1d53648d7107d121ed79f69a27b717817c5e9da521d50319dd261212 \
-    --hash=sha256:6dd2d7d4e4fd5895ce4ea20e258fce0d4b81e914b697d116a5ab0365f8303bad
+tox==4.50.2 \
+    --hash=sha256:0679e0fc82884275468d85592f30865e00609e4f1a7ee1ac7b561ea7036fe493 \
+    --hash=sha256:dd9e99fcf54660cde07bf2def4a242990447f440038e1d7c5133509aec2f7184
     # via
     #   -r CI/requirements_ci.in
     #   tox-gh
