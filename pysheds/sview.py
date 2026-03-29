@@ -422,11 +422,20 @@ class ViewFinder():
 
     @property
     def bbox(self):
-        shape = self.shape
-        xmin, ymax = View.affine_transform(self.affine, 0, 0)
-        xmax, ymin = View.affine_transform(self.affine, shape[-1], shape[-2])
-        _bbox = (xmin, ymin, xmax, ymax)
-        return _bbox
+        affine = self.affine
+        ncols = self.shape[-1]
+        nrows = self.shape[-2]
+        if affine.b == affine.d == 0:
+            xs = (affine.c, affine.c + affine.a * ncols)
+            ys = (affine.f, affine.f + affine.e * nrows)
+        else:
+            c0x, c0y = affine.c, affine.f
+            c1x, c1y = affine * (0, nrows)
+            c2x, c2y = affine * (ncols, nrows)
+            c3x, c3y = affine * (ncols, 0)
+            xs = (c0x, c1x, c2x, c3x)
+            ys = (c0y, c1y, c2y, c3y)
+        return (min(xs), min(ys), max(xs), max(ys))
 
     @property
     def extent(self):
