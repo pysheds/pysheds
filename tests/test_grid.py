@@ -1,7 +1,10 @@
+import math
+
 import numpy as np
 import pyproj
 import pytest
 from pysheds.grid import Grid
+from pysheds.view import ViewFinder
 
 
 # Initialize parameters
@@ -557,3 +560,46 @@ def test_misc(d, grid):
     dem = d.dem
     l, r, t, b = grid._pop_rim(dem, nodata=0)
     grid._replace_rim(dem, l, r, t, b)
+
+
+@pytest.mark.parametrize(
+    "affine_args, shape, expected",
+    [
+        pytest.param(
+            (1.0, 0.0, 0.0, 0.0, 1.0, 0.0),
+            (100, 200),
+            (0.0, 0.0, 200.0, 100.0),
+            id="positive_resolution",
+        ),
+        pytest.param(
+            (1.0, 0.0, 0.0, 0.0, -1.0, 100.0),
+            (100, 200),
+            (0.0, 0.0, 200.0, 100.0),
+            id="north_up",
+        ),
+        pytest.param(
+            (-1.0, 0.0, 200.0, 0.0, -1.0, 100.0),
+            (100, 200),
+            (0.0, 0.0, 200.0, 100.0),
+            id="negative_x_resolution",
+        ),
+        pytest.param(
+            (math.cos(math.pi / 2), -math.sin(math.pi / 2), 0.0,
+             math.sin(math.pi / 2), math.cos(math.pi / 2), 0.0),
+            (100, 200),
+            (-100.0, 0.0, 0.0, 200.0),
+            id="90_degree_rotation",
+        ),
+        pytest.param(
+            (1.0, 0.5, 0.0, -0.3, -1.0, 100.0),
+            (100, 200),
+            (0.0, -60.0, 250.0, 100.0),
+            id="shear_mixed_signs",
+        ),
+    ],
+)
+def test_viewfinder_bbox(affine_args, shape, expected):
+    from affine import Affine
+
+    viewfinder = ViewFinder(Affine(*affine_args), shape)
+    assert viewfinder.bbox == pytest.approx(expected, abs=1e-10)
