@@ -65,17 +65,14 @@ packages = ["pysheds"]
 [tool.hatch.version]
 source = "vcs"
 
-[tool.pytest]
+[tool.pytest.ini_options]
 minversion = "9.0"
 addopts = [
   "-ra",
   "--color=yes",
-  "--strict",
+  "--strict-markers",
   "--verbose",
 ]
 filterwarnings = ["ignore::UserWarning"]
 markers = []
 testpaths = ["tests"]
-
-[tool.setuptools]
-packages = ["pysheds"]
