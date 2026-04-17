@@ -6,7 +6,7 @@ on:
       - master
     paths:
       - pysheds
-      - setup.py
+      - pyproject.toml
   pull_request:
 
 concurrency:
@@ -90,7 +90,7 @@ jobs:
         uses: actions/cache@668228422ae6a00e4ad889ee87cd7109ec5666a7 # v5.0.4
         with:
           path: .tox
-          key: ${{ matrix.os }}-Python${{ matrix.python-version }}-${{ hashFiles('setup.py', 'tox.toml') }}
+          key: ${{ matrix.os }}-Python${{ matrix.python-version }}-${{ hashFiles('pyproject.toml', 'tox.toml') }}
       - name: Test with tox
         run: |
           python -m tox
