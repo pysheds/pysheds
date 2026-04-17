@@ -1,10 +1,10 @@
 [build-system]
-requires = ["setuptools>=68", "wheel"]
-build-backend = "setuptools.build_meta"
+requires = ["hatch-vcs", "hatchling"]
+build-backend = "hatchling.build"
+
 
 [project]
 name = "pysheds"
-version = "0.5"
 description = "Simple and fast watershed delineation in python."
 readme = {text = "Simple and fast watershed delineation in python.", content-type = "text/x-rst"}
 license = "GPL-3.0-or-later"
@@ -25,6 +25,7 @@ classifiers = [
     "Topic :: Scientific/Engineering :: GIS",
     "Topic :: Scientific/Engineering :: Hydrology",
 ]
+dynamic = ["version"]
 dependencies = [
     "affine",
     "geojson",
@@ -52,6 +53,12 @@ source = ["pysheds/", "*/site-packages/pysheds/"]
 [tool.coverage.run]
 omit = ["examples/*.ipynb", "tests/*.py"]
 relative_files = true
+
+[tool.hatch.build.targets.wheel]
+packages = ["pysheds"]
+
+[tool.hatch.version]
+source = "vcs"
 
 [tool.pytest]
 minversion = "9.0"
