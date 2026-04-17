@@ -8,6 +8,7 @@ name = "pysheds"
 description = "Simple and fast watershed delineation in python."
 readme = {text = "Simple and fast watershed delineation in python.", content-type = "text/x-rst"}
 license = "GPL-3.0-or-later"
+license-files = ["LICENSE"]
 requires-python = ">=3.11"
 authors = [
     {name = "Matt Bartos", email = "mdbartos@umich.edu"},
