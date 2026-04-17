@@ -1,0 +1,39 @@
+name: Bug report
+description: Help us improve PySheds
+labels: [ "bug" ]
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report!
+  - type: textarea
+    id: setup-information
+    attributes:
+      label: Setup Information
+      value: |
+        - PySheds version:
+        - Python version:
+        - Operating System:
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: Describe what you were trying to get done. Tell us what happened, what went wrong, and what you expected to happen.
+  - type: textarea
+    id: steps-to-reproduce
+    attributes:
+      label: Steps To Reproduce
+      description: Paste the command(s) you ran and the output. If there was a crash, please include the traceback below.
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional context
+      description: Add any other context about the problem here.
+  - type: checkboxes
+    id: submit-pr
+    attributes:
+      label: Contribution
+      description: Do you intend to submit a fix for this bug? (The PySheds developers will help with code compliance)
+      options:
+        - label: I would be willing/able to open a Pull Request to address this bug.

@@ -46,5 +46,24 @@ recipes = ["geopandas", "ipython", "matplotlib", "seaborn"]
 Homepage = "http://open-storm.org"
 Repository = "https://github.com/mdbartos/pysheds"
 
+[tool.coverage.paths]
+source = ["pysheds/", "*/site-packages/pysheds/"]
+
+[tool.coverage.run]
+omit = ["examples/*.ipynb", "tests/*.py"]
+relative_files = true
+
+[tool.pytest]
+minversion = "9.0"
+addopts = [
+  "-ra",
+  "--color=yes",
+  "--strict",
+  "--verbose",
+]
+filterwarnings = ["ignore::UserWarning"]
+markers = []
+testpaths = ["tests"]
+
 [tool.setuptools]
 packages = ["pysheds"]
