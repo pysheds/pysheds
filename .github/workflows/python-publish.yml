@@ -10,7 +10,7 @@ name: Upload Python Package
 
 on:
   release:
-    types: 
+    types:
       - published
 
 jobs:
@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [ "3.14" ]
+        python-version: [ "3.13" ]
     steps:
     - name: Harden Runner
       uses: step-security/harden-runner@fa2e9d605c4eeb9fcad4c99c224cee0c6c7f3594 # v2.16.0
@@ -29,20 +29,20 @@ jobs:
 
     - name: Checkout Repository
       uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-    
+
     - name: Set up Python${{ matrix.python-version }}
       uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
       with:
         python-version: ${{ matrix.python-version}}
-    
+
     - name: Install CI libraries
       run: |
         python -m pip install --require-hashes -r CI/requirements_ci.txt
-    
+
     - name: Build package
       run: |
         python -m build
-    
+
     - name: Publish package
       uses: pypa/gh-action-pypi-publish@ed0c53931b1dc9bd32cbe73a98c7f6766f8a527e
       with:
