@@ -12,6 +12,9 @@ requires-python = ">=3.11"
 authors = [
     {name = "Matt Bartos", email = "mdbartos@umich.edu"},
 ]
+maintainers = [
+    {name = "Trevor James Smith", email = "smith.trevorj@ouranos.ca"},
+]
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
@@ -22,6 +25,7 @@ classifiers = [
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
     "Topic :: Scientific/Engineering :: GIS",
     "Topic :: Scientific/Engineering :: Hydrology",
 ]
@@ -45,7 +49,7 @@ recipes = ["geopandas", "ipython", "matplotlib", "seaborn"]
 
 [project.urls]
 Homepage = "http://open-storm.org"
-Repository = "https://github.com/mdbartos/pysheds"
+Repository = "https://github.com/pysheds/pysheds"
 
 [tool.coverage.paths]
 source = ["pysheds/", "*/site-packages/pysheds/"]
