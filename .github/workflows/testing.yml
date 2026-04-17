@@ -5,14 +5,14 @@ on:
     branches:
       - master
     paths:
-      - pysheds
+      - pysheds/**
       - pyproject.toml
   pull_request:
 
 concurrency:
   # For a given workflow, if we push to the same branch, cancel all previous builds on that branch except on master.
   group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/master' }}
 
 permissions:
   contents: read
@@ -51,7 +51,7 @@ jobs:
         with:
           path: |
            .tox
-          key: ${{ hashFiles('setup.py', 'tox.toml') }}-lint
+          key: ${{ hashFiles('pyproject.toml', 'tox.toml') }}-lint
       - name: Run linting suite
         run: |
           python -m tox -e lint
