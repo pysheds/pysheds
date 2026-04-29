@@ -1,6 +1,6 @@
 env_list = [
   "lint",
-  {product = [{prefix = "py3", start = 10, stop = 14}]}
+  {product = [{prefix = "py3.", start = 10, stop = 14}]}
 ]
 skip_missing_interpreters = true
 
