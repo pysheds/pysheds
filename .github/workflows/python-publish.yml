@@ -1,8 +1,8 @@
-# This workflow will upload a Python Package using Twine when a release is created
+# This workflow will upload a Python Package using uv when a release is created
 # For more information see: https://help.github.com/en/actions/language-and-framework-guides/using-python-with-github-actions#publishing-to-package-registries
 
 # This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
+# They are provided by third-parties and are governed by
 # separate terms of service, privacy policy, and support
 # documentation.
 
@@ -16,43 +16,39 @@ permissions:
   contents: read
 
 jobs:
-  deploy:
-    name: Deploy
+  publish:
+    name: Publish
     runs-on: ubuntu-latest
     environment: pypi
     permissions:
       # IMPORTANT: this permission is mandatory for trusted publishing
       id-token: write
+    strategy:
+      matrix:
+        python-version: [ "3.13" ]
     steps:
       - name: Harden Runner
         uses: step-security/harden-runner@20cf305ff2072d973412fa9b1e3a4f227bda3c76 # v2.14.0
         with:
           disable-sudo: true
-          egress-policy: block
-          allowed-endpoints: >
-            files.pythonhosted.org:443
-            github.com:443
-            pypi.org:443
-            ruf-repo-cdn.sigstore.dev:443
-            upload.pypi.org:443
+          egress-policy: audit
 
       - name: Checkout Repository
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           persist-credentials: false
     
-      - name: Set up Python
-        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
-        with:
-          python-version: '3.x'
-    
-      - name: Install CI libraries
+      - name: Install uv
+        uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b # v8.1.0
+
+      - name: Install Python ${{ matrix.python-version }}
         run: |
-          python -m pip install --require-hashes -r CI/requirements_ci.txt
-      
+          uv python install ${{ matrix.python-version }}
+    
       - name: Build package
         run: |
-          python -m build
+          uv build
     
       - name: Publish package
-        uses: pypa/gh-action-pypi-publish@ed0c53931b1dc9bd32cbe73a98c7f6766f8a527e # v1.13.0
+        run: |
+          uv publish
