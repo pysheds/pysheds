@@ -5,14 +5,17 @@ on:
     branches:
       - master
     paths:
-      - pysheds
-      - setup.py
+      - pysheds/**
+      - pyproject.toml
+      - tox.toml
+      - CI/**
+      - .github/workflows/**
   pull_request:
 
 concurrency:
   # For a given workflow, if we push to the same branch, cancel all previous builds on that branch except on master.
   group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/master' }}
 
 permissions:
   contents: read
@@ -38,6 +41,7 @@ jobs:
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           persist-credentials: false
+          fetch-depth: 0
       - name: Set up Python${{ matrix.python-version }}
         uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
         with:
@@ -51,7 +55,7 @@ jobs:
         with:
           path: |
            .tox
-          key: ${{ hashFiles('setup.py', 'tox.toml') }}-lint
+          key: ${{ hashFiles('pyproject.toml', 'tox.toml') }}-lint
       - name: Run linting suite
         run: |
           python -m tox -e lint
@@ -63,7 +67,7 @@ jobs:
     strategy:
       matrix:
         os: [ 'ubuntu-latest' ]
-        python-version: [ "3.11", "3.12", "3.13", "3.14" ]
+        python-version: [ "3.11", "3.12", "3.13" ]
     steps:
       - name: Harden Runner
         uses: step-security/harden-runner@fa2e9d605c4eeb9fcad4c99c224cee0c6c7f3594 # v2.16.0
@@ -78,6 +82,7 @@ jobs:
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           persist-credentials: false
+          fetch-depth: 0
       - name: Set up Python${{ matrix.python-version }}
         uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
         with:
@@ -90,7 +95,7 @@ jobs:
         uses: actions/cache@668228422ae6a00e4ad889ee87cd7109ec5666a7 # v5.0.4
         with:
           path: .tox
-          key: ${{ matrix.os }}-Python${{ matrix.python-version }}-${{ hashFiles('setup.py', 'tox.toml') }}
+          key: ${{ matrix.os }}-Python${{ matrix.python-version }}-${{ hashFiles('pyproject.toml', 'tox.toml') }}
       - name: Test with tox
         run: |
           python -m tox
