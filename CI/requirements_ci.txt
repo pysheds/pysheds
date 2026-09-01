@@ -98,7 +98,7 @@ tomli==2.4.1 \
     --hash=sha256:fd0409a3653af6c147209d267a0e4243f0ae46b011aa978b1080359fddc9b6cf \
     --hash=sha256:ff18e6a727ee0ab0388507b89d1bc6a22b138d1e2fa56d1ad494586d61d2eae9 \
     --hash=sha256:ff2983983d34813c1aeb0fa89091e76c3a22889ee83ab27c5eeb45100560c049
-    # via -r CI/requirements_ci.in
+    # via -r requirements_ci.in
 tomli-w==1.2.0 \
     --hash=sha256:188306098d013b691fcadc011abd66727d3c414c571bb01b1a174ba8c983cf90 \
     --hash=sha256:2dd14fac5a47c27be9cd4c976af5a12d87fb1f0b4512f81d69cce3b35ae25021
@@ -107,12 +107,12 @@ tox==4.56.0 \
     --hash=sha256:538c472ccd7e7c7f5a5bcbb7f1268579941986d0eeaf7e644fc4a1004076bc05 \
     --hash=sha256:9712ed24bae3b9963fe56140db5e3f1a86eed18ddcc35fff11d314038381fd23
     # via
-    #   -r CI/requirements_ci.in
+    #   -r requirements_ci.in
     #   tox-gh
 tox-gh==1.7.1 \
     --hash=sha256:4f4871ee4091b41464f2df9ab1fcedb14a48accdecbb60d53297301a9d8984c6 \
     --hash=sha256:a82285b16a597516f9a24f20326b124ddc7924a8b70cb05a9192e1c53d7f701d
-    # via -r CI/requirements_ci.in
+    # via -r requirements_ci.in
 virtualenv==21.2.0 \
     --hash=sha256:1720dc3a62ef5b443092e3f499228599045d7fea4c79199770499df8becf9098 \
     --hash=sha256:1bd755b504931164a5a496d217c014d098426cddc79363ad66ac78125f9d908f
