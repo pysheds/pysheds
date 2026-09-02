@@ -1,6 +1,6 @@
 env_list = [
   "lint",
-  {product = [{prefix = "py3", start = 10, stop = 14}]}
+  {product = [{prefix = "py3", start = 11, stop = 13}]}
 ]
 skip_missing_interpreters = true
 
@@ -39,8 +39,6 @@ commands_post = [
 ]
 
 [gh.python]
-"3.10" = ["py3.10"]
 "3.11" = ["py3.11"]
 "3.12" = ["py3.12"]
 "3.13" = ["py3.13"]
-"3.14" = ["py3.14"]
