@@ -3,6 +3,9 @@
 
 ## [Unreleased]
 
+### Added
+
+- Support has been extended to Python versions 3.11 to 3.14.
 
 ### Changed
 
@@ -12,7 +15,7 @@
 
 ### Removed
 
-- Python versions below 3.10 are no longer supported. Support has beeen extended for Python versions from 3.11 to 3.14.
+- Python versions below 3.10 are no longer supported.
 
 ### Security
 
@@ -55,7 +58,6 @@
 - Added package classifiers to better describe pysheds on PyPI, including support on Python3.11.
 - Added installer recipes (pysheds[dev] and pysheds[recipes]), to install the necessary packages for running tests and notebooks, respectively.
 - Added long description to setup.py.
-
 
 ### Removed
 
@@ -113,7 +115,6 @@
 ## 0.2.7.1
 
 Initial release target for zenodo.
-
 
 ## 0.2.7
 
